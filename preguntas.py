@@ -59,8 +59,8 @@ def pregunta_02():
     x_train, x_test, y_train, y_test = train_test_split(
         x_tagged,
         y_tagged,
-        test_size=0.1,
-        random_state=12345,
+        test_size = 0.1,
+        random_state = 12345,
     )
 
     # Retorne `X_train`, `X_test`, `y_train` y `y_test`
@@ -113,22 +113,22 @@ def pregunta_04():
     # límite superior para la frecuencia de palabras es del 100% y un límite
     # inferior de 5 palabras. Solo deben analizarse palabras conformadas por
     # letras.
-    countVectorizer =  CountVectorizer(
+    countVectorizer = CountVectorizer(
         analyzer = analyzer,
-        lowercase=True,
-        stop_words =_"english",
+        lowercase = True,
+        stop_words = "english",
         token_pattern = r"\b\w\w+\b",
         binary = True,
         max_df = 1.0,
-        min_df = 5,
+        min_df = 5
     )
 
     # Cree un pipeline que contenga el CountVectorizer y el modelo de BernoulliNB.
     pipeline = Pipeline(
         steps=[
             ("CountVectorizer", countVectorizer),
-            ("BernoulliNB", BernoulliNB()),
-        ],
+            ("BernoulliNB", BernoulliNB())
+        ]
     )
 
     # Defina un diccionario de parámetros para el GridSearchCV. Se deben
@@ -146,7 +146,7 @@ def pregunta_04():
         cv = 5,
         scoring = "accuracy",
         refit = True,
-        return_train_score = False,
+        return_train_score = False
     )
 
     # Búsque la mejor combinación de regresores
@@ -174,12 +174,12 @@ def pregunta_05():
     # Evalúe el pipeline con los datos de entrenamiento usando la matriz de confusion.
     cfm_train = confusion_matrix(
         y_true = y_train,
-        y_pred = gridSearchCV.predict(X_train),
+        y_pred = gridSearchCV.predict(X_train)
     )
 
     cfm_test = confusion_matrix(
         y_true = y_test,
-        y_pred = gridSearchCV.predict(X_train),
+        y_pred = gridSearchCV.predict(X_test)
     )
 
     # Retorne la matriz de confusion de entrenamiento y prueba
